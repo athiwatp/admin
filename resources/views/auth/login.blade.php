@@ -36,10 +36,13 @@
                         <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2">
                   </div>
 
-                  <div class="text-center">
-                     <button type="submit" class="btn btn-success btn-submit">
+                  <div>
+                     <button type="submit" class="btn btn-success">
                         Login
                      </button>
+                     <span class="pull-right">
+                        <a href="{{ route('password.request') }}">Forgot Password?</a>
+                     </span>
                   </div>
                </form>
 
@@ -47,12 +50,11 @@
                   <div class="title">OR</div>
                </div>
                <div class="form-footer">
-                  <button disabled="true" type="button" class="btn btn-default btn-sm btn-social __facebook">
+                  <a href="{{ url('register') }}" type="button" class="btn btn-default">
                      <div class="info">
-                        <i class="icon fa fa-facebook-official" aria-hidden="true"></i>
-                        <span class="title">Login with Facebook</span>
+                        <span class="title">Register</span>
                      </div>
-                  </button>
+                  </a>
                </div>
             </div>
          </div>

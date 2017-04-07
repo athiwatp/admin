@@ -82,12 +82,11 @@
                      <div class="title">OR</div>
                   </div>
                   <div class="form-footer">
-                     <button type="button" class="btn btn-default btn-sm btn-social __facebook">
+                     <a href="{{ route('login') }}" type="button" class="btn btn-default">
                         <div class="info">
-                           <i class="icon fa fa-facebook-official" aria-hidden="true"></i>
-                           <span class="title">Register w/ Facebook</span>
+                           <span class="title">Login</span>
                         </div>
-                     </button>
+                     </a>
                   </div>
                </div>
             </div>
