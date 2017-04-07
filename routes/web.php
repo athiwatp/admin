@@ -20,3 +20,4 @@ Route::get('user/paginate', 'UserController@paginate');
 Route::get('user/count', 'UserController@count');
 Route::post('user/store', 'UserController@store');
 Route::get('user/{id}', 'UserController@show');
+Route::delete('user/{id}', 'UserController@destroy');

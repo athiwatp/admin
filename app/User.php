@@ -35,4 +35,20 @@ class User extends Authenticatable
     {
         return 'https://www.gravatar.com/avatar/' . md5($this->attributes['email']);
     }
+
+    public function scopeFilter($query, $keyword = null)
+    {
+        $keyword = request('keyword', $keyword);
+        if (!empty($keyword)) {
+            $query->where('name', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('email', 'LIKE', '%' . $keyword . '%');
+        }
+
+        return $query;
+    }
+
+    public function scopeSort($query)
+    {
+        return $query->orderBy(\DB::raw('LENGTH(name) ASC'));
+    }
 }

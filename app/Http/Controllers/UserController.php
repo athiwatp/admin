@@ -10,6 +10,7 @@ class UserController extends Controller
     public function paginate()
     {
         $users = User::orderBy('name', 'ASC')
+            ->filter()
             ->paginate(request('limit', 20));
 
         if (request()->all()) {
@@ -45,8 +46,31 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
         ]);
 
+        $password = empty($request->password) ? str_random(6) : $request->password;
+
+        $user = User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => bcrypt($password),
+        ]);
+
         return response()->json([
             'status' => true,
+            'user'   => $user,
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::whereId($id)->first();
+
+        if ($user->delete()) {
+            return response()->json($user);
+        }
+
+        return response()->json([
+            'status'  => false,
+            'message' => 'Delete failed or user is not exists.',
+        ], 403);
     }
 }
