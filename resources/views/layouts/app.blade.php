@@ -28,23 +28,15 @@
   <div class="sidebar-footer">
     <ul class="menu">
       <li>
-        <a href="/" class="dropdown-toggle" data-toggle="dropdown">
+        <router-link :to="{ name: 'dashboard' }" class="dropdown-toggle" data-toggle="dropdown">
           <i class="fa fa-cogs" aria-hidden="true"></i>
-        </a>
+        </router-link>
       </li>
       <li><a href="#"><span class="flag-icon flag-icon-th flag-icon-squared"></span></a></li>
     </ul>
   </div>
 </aside>
 
-<script type="text/ng-template" id="sidebar-dropdown.tpl.html">
-  <div class="dropdown-background">
-    <div class="bg"></div>
-  </div>
-  <div class="dropdown-container">
-
-  </div>
-</script>
 <div class="app-container">
 
   <nav class="navbar navbar-default" id="navbar">
@@ -61,7 +53,7 @@
         </li>
         <li>
           <button type="button" class="navbar-toggle">
-            <img class="profile-img" src="./assets/images/profile.png">
+            <img class="profile-img" src="{{ auth()->user()->gravatar_url }}" alt="{{ auth()->user()->name }}">
           </button>
         </li>
       </ul>
@@ -179,12 +171,12 @@
         </li>
         <li class="dropdown profile">
           <a href="/html/pages/profile.html" class="dropdown-toggle"  data-toggle="dropdown">
-            <img class="profile-img" src="./assets/images/profile.png">
+            <img class="profile-img" src="{{ auth()->user()->gravatar_url }}" alt="{{ auth()->user()->name }}">
             <div class="title">Profile</div>
           </a>
           <div class="dropdown-menu">
             <div class="profile-info">
-              <h4 class="username">Scott White</h4>
+              <h4 class="username">{{ auth()->user()->name }}</h4>
             </div>
             <ul class="action">
               <li>
@@ -204,7 +196,7 @@
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="{{ route('logout') }}">
                   Logout
                 </a>
               </li>
@@ -229,7 +221,6 @@
 
   <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/vendor.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
   @stack('js')
 
 </body>
