@@ -220,32 +220,17 @@
   <router-view></router-view>
 </transition>
 
-<footer class="app-footer">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="footer-copyright">
-        Copyright © 2016 Company Co,Ltd.
-      </div>
-    </div>
-  </div>
-</footer>
+@include('layouts.partials.footer')
 </div>
 
   </div>
 
-  <script>
-    window.Laravel = {!! json_encode([
-      'csrf' => csrf_token(),
-      'app' => [
-        'name' => config('app.name'),
-        'auth' => auth()->check()
-      ]
-    ]) !!}
-  </script>
+  @include('layouts.partials.js')
 
   <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/vendor.js') }}"></script>
   <script type="text/javascript" src="{{ asset('js/admin.js') }}"></script>
+  @stack('js')
 
 </body>
 </html>
