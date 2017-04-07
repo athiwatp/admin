@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -34,6 +35,18 @@ class UserController extends Controller
     {
         return response()->json([
             'total' => User::count(),
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name'  => 'required|max:100',
+            'email' => 'required|email|unique:users,email',
+        ]);
+
+        return response()->json([
+            'status' => true,
         ]);
     }
 }
