@@ -11,9 +11,10 @@
 |
  */
 
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
-Route::get('/', 'AdminController');
+Route::get('/', 'AdminController')->middleware('auth');
 
 Route::get('user/paginate', 'UserController@paginate');
 Route::get('user/count', 'UserController@count');

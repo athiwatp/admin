@@ -20,7 +20,7 @@
                <div class="form-header">
                   <div class="app-brand"><span class="highlight">{{ config('app.name') }}</span> Admin</div>
                </div>
-               <form action="{{ route('login') }}" method="POST">
+               <form action="{{ route('login') }}" method="post">
                   {{ csrf_field() }}
                   {{ method_field('post') }}
 
