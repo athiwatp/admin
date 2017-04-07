@@ -3,10 +3,10 @@
          <div class="col-md-12">
             <div class="card">
                <div class="card-header">
-                  Create new user
+                  Edit User {{ state.name }}
                </div>
                <div class="card-body">
-                  <form @submit.prevent="store" method="post" action="/user/store" class="form form-horizontal">
+                  <form @submit.prevent="update" method="post" action="/user/update" class="form form-horizontal">
                      <div class="section">
                         <div class="section-title">Basic Information</div>
                         <div class="section-body">
@@ -94,28 +94,18 @@
 
       mounted() {
          this.$root.$data.page.title = 'Users';
-
          this.$bus.$emit('enable-search', false);
+
+         const url = `/user/${this.$route.params.id}`;
+         axios.get(url).then(response => {
+            this.state = response.data;
+         });
       },
 
       methods: {
-         store(e) {
-            axios.post(e.target.action, this.state).then(response => {
-               if (response.data.status == true) {
-                  this.errors = [];
+         update(e) {
+            axios.put(e.target.action, this.state).then(response => {
 
-                  this.state = {
-                     name: '',
-                     email: '',
-                     password: ''
-                  }
-               }
-            }).catch(error => {
-               if (! _.isEmpty(error)) {
-                  if (error.response.status == 422) {
-                     this.errors = error.response.data;
-                  }
-               }
             });
          },
 

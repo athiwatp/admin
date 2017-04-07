@@ -11,7 +11,10 @@ require('./bootstrap');
 * the page. Then, you may begin adding components to this application
 * or customize the JavaScript scaffolding to fit your unique needs.
 */
-Vue.component('pagination', require('./components/pagination.vue'));
+Vue.component('pagination', require('./components/common/pagination.vue'));
+Vue.component('search', require('./components/common/search.vue'));
+Vue.component('notification', require('./components/common/notification.vue'));
+Vue.component('button-delete', require('./components/common/button-delete.vue'));
 
 /**
 * Vue Router
@@ -23,6 +26,11 @@ Vue.use(VueRouter);
 
 // define routes for users
 const routes = [
+  {
+    path: '/',
+    name: 'index',
+    component: require('./components/404.vue')
+  },
   {
     path: '/dashboard',
     name: 'dashboard',
@@ -42,8 +50,22 @@ const routes = [
     path: '/user/:id',
     name: 'user.profile',
     component: require('./components/user/profile.vue')
+  },
+  {
+    path: '/user/:id/edit',
+    name: 'user.edit',
+    component: require('./components/user/edit.vue')
   }
 ]
+
+// demo components
+const demo = [
+  {
+    path: '/table',
+    name: 'demo.table',
+    component: require('./components/dashboard.vue')
+  }
+];
 
 const router = new VueRouter({ routes });
 
@@ -68,13 +90,14 @@ window.app = new Vue({
   router,
   data: {
     bus: bus,
-  	page: {
-  		title: Laravel.app.name,
-  		icon: 'fa-dashboard'
-  	},
+    page: {
+      title: Laravel.app.name,
+      icon: 'fa-dashboard'
+    },
   	app: {
   		name: Laravel.app.name,
-  		auth: Laravel.auth
+  		auth: Laravel.app.auth,
+      user: Laravel.app.user
   	}
   }
 }).$mount('#app');

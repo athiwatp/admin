@@ -47,10 +47,18 @@
       },
 
       mounted() {
-// count total user
-axios.get('/user/count').then(response => {
-   this.user = response.data.total;
-});
-}
-}
+         // page settings
+         this.$root.$data.page = {
+            title: 'Dashboard',
+            icon: 'fa-dashboard'
+         };
+
+         // count total user
+         axios.get('/user/count').then(response => {
+            this.user = response.data.total;
+         });
+
+         this.$bus.$emit('enable-search', false);
+      }
+   }
 </script>
